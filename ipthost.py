@@ -16,10 +16,11 @@ logo = """
 ##################################################
 #Simple Script to find all websites              #
 #hosted on the same server.                      #
-#Script by Firas Jelassi, James Park-Watt,r518   #
+#Script created by Firas Jelassi                 # 
+#Project member: James Park-Watt and r518        #
 #Github: @ChronosOG @jimmypw @r518               #
-#Type %s --help to see the flags        #
-#################################################
+#Type %s --help to see the flags                 #
+##################################################
 """
 parser = argparse.ArgumentParser(description='')
 parser._optionals.title = "Flags for using the script"
