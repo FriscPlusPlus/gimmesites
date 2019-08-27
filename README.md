@@ -50,7 +50,8 @@ powershell Invoke-WebRequest -Uri 'https://github.com/ChronosOG/ipThost/releases
 ##################################################
 #Simple Script to find all websites              #
 #hosted on the same server.                      #
-#Script by Firas Jelassi, James Park-Watt,r518   #
+#Script created by Firas Jelassi                 # 
+#Project member: James Park-Watt and r518        #
 #Github: @ChronosOG @jimmypw @r518               #
 #Type %s --help to see the flags                 #
 ##################################################
