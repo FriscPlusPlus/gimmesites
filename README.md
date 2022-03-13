@@ -1,4 +1,4 @@
 # WORK IN PROGRESS
 
 ## License
-[LGPL](https://choosealicense.com/licenses/lgpl-3.0/)
+[GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html)
