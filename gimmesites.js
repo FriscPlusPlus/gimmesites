@@ -1,28 +1,23 @@
-const args = require("args-parser")(process.argv);
+const arguments = require("args-parser")(process.argv);
+const validator = require("./src/argsHelper");
 const Search = require("./src/BingSearch");
+const logo = require("./src/logo");
 const chalk = require("chalk");
 const cliSpinners = require("cli-spinners");
 const ora = require("ora");
-console.clear(); // clear console, for a better view
+
 /**
- * LOGO FIRAS JELASSI
+ * Script logo
  */
 
-console.log(
-  chalk.hex("#FF003C")(`
+console.log(chalk.hex("#FF003C")(logo()));
 
-  ______ _____ _______ _______ _______ _______ _____ _______ _______ _______
- |  ____   |   |  |  | |  |  | |______ |______   |      |    |______ |______ {V1.0.0}
- |_____| __|__ |  |  | |  |  | |______ ______| __|__    |    |______ ______| By Firas Jelassi (https://github.com/Friscas/)
+/**
+ * calling the function argsValidation from the helper argsHelper
+ */
+validator(arguments);
 
- This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
- without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
- See the GNU General Public License v2.0 for more details at http://www.gnu.org/licenses/gpl-2.0.html.
- 
-`)
-);
-
-var cleanDone = false;
+var cleanDone = false; // global variable needed to know if the clean event is really over to avoid printing the succeed msg for every link (bad way of handling it, will fix it)
 
 const BingSearch = new Search("176.52.245.147", {
   pageCount: 100,
