@@ -91,7 +91,7 @@ class BingSearch {
   async _verifyUrl(url) {
     const bSameIP = (await lookup(url.host)).address === this.target;
     return {
-      url: url.host,
+      url: `${url.protocol}//${url.host}`,
     };
   }
 

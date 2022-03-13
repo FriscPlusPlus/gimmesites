@@ -2,9 +2,9 @@
   "name": "gimmesites",
   "version": "1.0.0",
   "description": "Find which domains are sharing the same IP",
-  "main": "index.js",
+  "main": "gimmesites.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node gimmesites.js"
   },
   "repository": {
     "type": "git",
