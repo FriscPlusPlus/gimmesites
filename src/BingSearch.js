@@ -2,9 +2,12 @@ const axios = require("axios").default;
 const cheerio = require("cheerio");
 const url = require("url");
 const util = require("util");
+const EventEmitter = require("events");
 const dns = require("dns");
 const { debug } = require("console");
 const lookup = util.promisify(dns.lookup);
+
+const eventEmitter = new EventEmitter();
 
 class BingSearch {
   constructor(target, options) {
@@ -21,7 +24,7 @@ class BingSearch {
     this.saveLink = [];
   }
 
-  async main() {
+  async search() {
     let urls = [],
       allRequests;
     for (var i = 0; i < this.pageCount; i++) {
@@ -68,6 +71,7 @@ class BingSearch {
   }
 
   async _sendRequests(allRequests) {
+    eventEmitter.emit("search");
     let data = [];
     axios
       .all(allRequests)
@@ -92,6 +96,7 @@ class BingSearch {
   }
 
   _parseToDomains(data) {
+    eventEmitter.emit("clean", this._countTotalUrl(data));
     for (let response of data) {
       const $ = cheerio.load(response.data);
       $(".b_algo").each((index, element) => {
@@ -110,8 +115,25 @@ class BingSearch {
     }
   }
 
+  _countTotalUrl(data) {
+    const urls = [];
+    for (let response of data) {
+      const $ = cheerio.load(response.data);
+      $(".b_algo").each((index, element) => {
+        const $ = cheerio.load(element.children[0]);
+        const link = url.parse($("a").attr("href"));
+        urls.push(link.host);
+      });
+    }
+    return urls.length;
+  }
+
   _returnLinks(link) {
-    console.log(link);
+    eventEmitter.emit("links", link);
+  }
+
+  on(eventID, method) {
+    eventEmitter.on(eventID, method);
   }
 }
 
