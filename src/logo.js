@@ -7,6 +7,6 @@ module.exports = function logo() {
   
    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-   See the GNU General Public License v2.0 for more details at http://www.gnu.org/licenses/gpl-2.0.html.
+   See the GNU General Public License v3.0 for more details at http://www.gnu.org/licenses/gpl-3.0.html.
   `;
 };
