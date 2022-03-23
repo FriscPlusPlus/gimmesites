@@ -3,7 +3,7 @@ const validator = require('./src/argsHelper');
 const Search = require('./src/BingSearch');
 const logo = require('./src/logo');
 const chalk = require('chalk');
-const { search, clean, links } = require('./src/helpers');
+const helpers = require('./src/helpers');
 
 function start() {
   /**
@@ -21,7 +21,7 @@ function start() {
    * Check the source code for comments about how the class works
    */
 
-  const BingSearch = new Search('176.52.245.147', {
+  const BingSearch = new Search('185.77.32.227', {
     pageCount: 100,
     bProxy: false,
   });
@@ -30,10 +30,10 @@ function start() {
    * Settings events and using as arguments the function from the module src/helpers, check it for more info
    */
 
-  BingSearch.on('search', search);
-  BingSearch.on('clean', clean.bind(this));
-  BingSearch.on('links', links.bind(this));
-  BingSearch.on('error', error.bind(this));
+  BingSearch.on('search', helpers.search);
+  BingSearch.on('clean', helpers.clean.bind(this));
+  BingSearch.on('links', helpers.links.bind(this));
+  BingSearch.on('error', helpers.error.bind(this));
 
   /**
    * Calling the main method called search to start the process

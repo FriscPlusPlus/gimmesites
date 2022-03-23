@@ -24,7 +24,9 @@
     "cheerio": "^1.0.0-rc.10",
     "cli-spinners": "^2.6.1",
     "cli-table3": "^0.6.1",
+    "ip-cidr": "^3.0.4",
     "ora": "^5.1.0",
+    "ping": "^0.4.1",
     "single-line-log": "^1.1.2"
   }
 }
