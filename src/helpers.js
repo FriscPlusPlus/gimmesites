@@ -42,5 +42,11 @@ module.exports = {
     });
     log(chalk.blue(table.toString()));
   },
-  error: function (error) {},
+  error: function (error) {
+    if (error.bCloudFlare) {
+      console.log(
+        chalk.bold.red('Looks like cloudflare, not going any further!')
+      );
+    }
+  },
 };

@@ -6,6 +6,7 @@ const EventEmitter = require('events');
 const dns = require('dns');
 const { debug } = require('console');
 const lookup = util.promisify(dns.lookup);
+const CloudFlare = require('iscloudy');
 
 const eventEmitter = new EventEmitter();
 
@@ -25,7 +26,7 @@ class BingSearch {
   }
 
   async search() {
-    if (!this._checkCloudflare(this.host)) {
+    if (!(await this._checkCloudflare(this.target))) {
       let urls = [],
         allRequests;
       for (var i = 0; i < this.pageCount; i++) {
@@ -135,8 +136,10 @@ class BingSearch {
   _returnLinks(link) {
     eventEmitter.emit('links', link);
   }
-  _checkCloudflare(host) {
-    
+  async _checkCloudflare(host) {
+    const IsCloudy = new CloudFlare(host, false);
+    const bCloudFlare = await IsCloudy.check();
+    return bCloudFlare.CloudFlare;
   }
 
   on(eventID, method) {
