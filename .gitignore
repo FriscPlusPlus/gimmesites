@@ -107,7 +107,6 @@ venv.bak/
 .vscode
 
 node_modules
-
 ips.json
 
 .history
