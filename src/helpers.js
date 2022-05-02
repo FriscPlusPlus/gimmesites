@@ -34,13 +34,8 @@ module.exports = {
       console.log(''); // adding spacing
     }
     links.push(url);
-    links.forEach((data, i) => {
-      let bIsPresent = table.find((e) => e[1] === data) ? true : false;
-      if (!bIsPresent) {
-        table.push([`#${i + 1}`, chalk.hex('#FF003C').bold(data)]);
-      }
-    });
-    log(chalk.blue(table.toString()));
+    console.log(`${chalk.hex('#FF003C').bold('Link found:')} ${chalk.hex('#FF003C').bold(url)}`);
+    console.log('');
   },
   error: function (error) {
     if (error.bCloudFlare) {
