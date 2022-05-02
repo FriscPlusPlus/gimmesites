@@ -28,19 +28,19 @@ class ArgsHelper {
   }
   help() {
     console.log(chalk.hex('#FF003C').bold(`Options:`));
-    console.log(chalk.hex('#FF003C')(`  --help`));
+    console.log(chalk.hex('#FF003C')(`  -h, --help`));
     console.log(chalk.hex('#FF003C')(`      display help information`));
-    console.log(chalk.hex('#FF003C')(`  --target`));
+    console.log(chalk.hex('#FF003C')(`  -t, --target`));
     console.log(
       chalk.hex('#FF003C')(`      IPv4 address to get the information from`)
     );
-    console.log(chalk.hex('#FF003C')(`  --count`));
+    console.log(chalk.hex('#FF003C')(`  -c, --count`));
     console.log(
       chalk.hex('#FF003C')(
         `      How many pages should the program search in Bing (default 100)`
       )
     );
-    console.log(chalk.hex('#FF003C')(`  --output`));
+    console.log(chalk.hex('#FF003C')(`  -o, --output`));
     console.log(
       chalk.hex('#FF003C')(`      Path of where to save the found websites`)
     );
@@ -78,10 +78,13 @@ module.exports = function argsValidation(args) {
   const allArgs = {
     help: argsHelper.help,
     output: argsHelper.output,
+    o: argsHelper.output,
     target: argsHelper.target,
+    t: argsHelper.target,
     tor: argsHelper.tor,
     proxy: argsHelper.proxy,
     count: argsHelper.count,
+    c: argsHelper.count,
   };
   if (Object.entries(args).length === 0) {
     argsHelper.noArgs();
@@ -90,7 +93,7 @@ module.exports = function argsValidation(args) {
     };
   }
   for (let prop in args) {
-    if (prop === 'help') {
+    if (prop === 'help' || prop === 'h') {
       argsHelper.help();
       return {
         help: true,
