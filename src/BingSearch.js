@@ -4,7 +4,6 @@ const url = require('url');
 const util = require('util');
 const EventEmitter = require('events');
 const dns = require('dns');
-const { debug } = require('console');
 const lookup = util.promisify(dns.lookup);
 const CloudFlare = require('iscloudy');
 

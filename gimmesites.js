@@ -1,4 +1,4 @@
-const arguments = require('args-parser')(process.argv);
+const args = require('args-parser')(process.argv);
 const validator = require('./src/argsHelper');
 const Search = require('./src/BingSearch');
 const logo = require('./src/logo');
@@ -10,11 +10,14 @@ function start() {
    * function that echos the logo
    */
   logo();
-
   /**
    * the function is called argsValidation and you can find it in the module src/argsHelper with full description
    */
-  validator(arguments);
+  const validatedArgs = validator(args);
+
+  // if the help flag is given or an error occurs we just end the program
+
+  if (validatedArgs.help || validatedArgs.error) return;
 
   /**
    * Creating instance of the BingSearch class
@@ -39,7 +42,7 @@ function start() {
    * Calling the main method called search to start the process
    */
 
-  BingSearch.search();
+  // BingSearch.search();
 }
 
 start();

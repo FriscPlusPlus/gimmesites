@@ -1,12 +1,5 @@
 const ora = require('ora');
-const log = require('single-line-log').stdout;
-const Table = require('cli-table3');
 const chalk = require('chalk');
-
-var table = new Table({
-  head: ['ID', 'Url'],
-  colWidths: [20, 50],
-});
 
 var links = [];
 var cleanDone = false; // global variable needed to know if the clean event is really over to avoid printing the succeed msg for every link (bad way of handling it, will fix it)
