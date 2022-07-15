@@ -17,14 +17,14 @@ function start() {
 
   // if the help flag is given or an error occurs we just end the program
 
-  if (validatedArgs.help || validatedArgs.error) return;
+  if (validatedArgs.stop) return;
 
   /**
    * Creating instance of the BingSearch class
    * Check the source code for comments about how the class works
    */
 
-  const BingSearch = new Search('185.77.32.227', {
+  const BingSearch = new Search('194.59.37.21', {
     pageCount: 100,
     bProxy: false,
   });
@@ -39,10 +39,10 @@ function start() {
   BingSearch.on('error', helpers.error.bind(this));
 
   /**
-   * Calling the main method called search to start the process
+   * Calling the main method called search to start the process 
    */
 
-  // BingSearch.search();
+ BingSearch.search();
 }
 
 start();

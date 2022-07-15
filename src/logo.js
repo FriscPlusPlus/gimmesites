@@ -5,7 +5,7 @@ module.exports = function logo() {
   console.log(
     chalk.hex('#FF003C')(`
     ______ _____ _______ _______ _______ _______ _____ _______ _______ _______
-   |  ____   |   |  |  | |  |  | |______ |______   |      |    |______ |______ {V1.0.0}
+   |  ____   |   |  |  | |  |  | |______ |______   |      |    |______ |______ {V1.0.0#beta}
    |_____| __|__ |  |  | |  |  | |______ ______| __|__    |    |______ ______| By Firas Jelassi (https://github.com/Friscas/)
   
    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 

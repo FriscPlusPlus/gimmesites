@@ -42,7 +42,7 @@ class ArgsHelper {
     );
     console.log(chalk.hex('#FF003C')(`  -o, --output`));
     console.log(
-      chalk.hex('#FF003C')(`      Path of where to save the found websites`)
+      chalk.hex('#FF003C')(`      Save the found websites in a json file`)
     );
     console.log(chalk.hex('#FF003C')(`  --tor`));
     console.log(
@@ -59,8 +59,10 @@ class ArgsHelper {
       )
     );
   }
-  output() {}
-  target() {}
+  output(path) {}
+  target(target) {
+    
+  }
   tor() {}
   proxy() {}
   count() {}
@@ -86,25 +88,25 @@ module.exports = function argsValidation(args) {
     count: argsHelper.count,
     c: argsHelper.count,
   };
+  let result = { stop: false };
   if (Object.entries(args).length === 0) {
     argsHelper.noArgs();
-    return {
-      error: true,
-    };
-  }
-  for (let prop in args) {
-    if (prop === 'help' || prop === 'h') {
-      argsHelper.help();
-      return {
-        help: true,
-      };
+    result.stop = true;
+  } else {
+    for (let prop in args) {
+      if (prop === 'help' || prop === 'h') {
+        argsHelper.help();
+        result.stop = true;
+        break;
+      }
+      if (!allArgs[prop]) {
+        argsHelper.error(prop);
+        result.stop = true;
+        break;
+      }
+      result.stop = !allArgs[prop](args[prop]);
+      if (result.stop) break;
     }
-    if (!allArgs[prop]) {
-      argsHelper.error(prop);
-      return {
-        error: true,
-      };
-    }
-    allArgs[prop](args[prop]);
   }
+  return result;
 };
