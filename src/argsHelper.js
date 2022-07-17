@@ -85,7 +85,9 @@ class ArgsHelper {
     });
     inst.get("https://check.torproject.org/api/ip").then((data) => {
       console.log(data);
-    });
+    }).catch((error) => {
+      console.log(chalk.hex("#FF003C")('It seems like tor is not running or maybe it is using another port?'));
+    })
   }
   proxy() {}
   count() {}
