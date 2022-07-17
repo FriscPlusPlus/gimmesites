@@ -1,4 +1,6 @@
-const chalk = require('chalk');
+const chalk = require("chalk");
+const axios = require("axios").default;
+const { SocksProxyAgent } = require("socks-proxy-agent");
 
 /**
  * @Type: Class
@@ -10,60 +12,81 @@ class ArgsHelper {
   noArgs() {
     console.log(
       chalk
-        .hex('#FF003C')
+        .hex("#FF003C")
         .bold('Example: gimmesites --target="185.77.32.227" --count=50')
     );
     console.log(
-      chalk.hex('#FF003C').bold('Call gimmesites --help for more information!')
+      chalk.hex("#FF003C").bold("Call gimmesites --help for more information!")
     );
   }
   error(flag) {
     console.log(
       chalk
-        .hex('#FF003C')
+        .hex("#FF003C")
         .bold(
           `The ${flag} option is incorrectly written or it does not exist, please use the --help flag for more information`
         )
     );
   }
   help() {
-    console.log(chalk.hex('#FF003C').bold(`Options:`));
-    console.log(chalk.hex('#FF003C')(`  -h, --help`));
-    console.log(chalk.hex('#FF003C')(`      display help information`));
-    console.log(chalk.hex('#FF003C')(`  -t, --target`));
+    console.log(chalk.hex("#FF003C").bold(`Options:`));
+    console.log(chalk.hex("#FF003C")(`  -h, --help`));
+    console.log(chalk.hex("#FF003C")(`      display help information`));
+    console.log(chalk.hex("#FF003C")(`  -t, --target`));
     console.log(
-      chalk.hex('#FF003C')(`      IPv4 address to get the information from`)
+      chalk.hex("#FF003C")(`      IPv4 address to get the information from`)
     );
-    console.log(chalk.hex('#FF003C')(`  -c, --count`));
+    console.log(chalk.hex("#FF003C")(`  -c, --count`));
     console.log(
-      chalk.hex('#FF003C')(
+      chalk.hex("#FF003C")(
         `      How many pages should the program search in Bing (default 100)`
       )
     );
-    console.log(chalk.hex('#FF003C')(`  -o, --output`));
+    console.log(chalk.hex("#FF003C")(`  -o, --output`));
     console.log(
-      chalk.hex('#FF003C')(`      Save the found websites in a json file`)
+      chalk.hex("#FF003C")(`      Save the found websites in a json file`)
     );
-    console.log(chalk.hex('#FF003C')(`  --tor`));
+    console.log(chalk.hex("#FF003C")(`  --tor`));
     console.log(
-      chalk.hex('#FF003C')(
-        `      Use tor as proxy (using default tor settings)`
+      chalk.hex("#FF003C")(
+        `      Use tor as proxy and define the port socks tor port (default 9150)`
       )
     );
     console.log(
-      chalk.hex('#FF003C')(`  --proxy, --proxyType, --proxyHost, --proxyPort`)
+      chalk.hex("#FF003C")(`  --proxy, --proxyType, --proxyHost, --proxyPort`)
     );
     console.log(
-      chalk.hex('#FF003C')(
+      chalk.hex("#FF003C")(
         `      Use custom proxy, use the flags like this: --proxy --proxyType=SOCKS5 --proxyHost=IP --proxyPort=PORT, no auth is supported for the moment`
       )
     );
   }
   output(path) {}
   target(target) {
-    
+    let bValid =
+      /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+        target
+      );
+    if (!bValid) {
+      console.log(chalk.hex("#FF003C")(`Invalid IPv4 address`));
+    }
+    return bValid;
   }
-  tor() {}
+  tor(port) {
+    console.log(chalk.hex("#FF003C")('Tor flag enabled...'));
+    console.log(chalk.hex("#FF003C")('Checking tor connection'));
+    if (typeof port === "boolean") {
+      port = 9150;
+    }
+    const agent = new SocksProxyAgent(`socks://127.0.0.1:${port}`);
+    const inst = axios.create({
+      httpAgent: agent,
+      httpsAgent: agent,
+    });
+    inst.get("https://check.torproject.org/api/ip").then((data) => {
+      console.log(data);
+    });
+  }
   proxy() {}
   count() {}
 }
@@ -94,7 +117,7 @@ module.exports = function argsValidation(args) {
     result.stop = true;
   } else {
     for (let prop in args) {
-      if (prop === 'help' || prop === 'h') {
+      if (prop === "help" || prop === "h") {
         argsHelper.help();
         result.stop = true;
         break;

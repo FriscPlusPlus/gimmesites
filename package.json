@@ -4,7 +4,7 @@
   "description": "Find which domains are sharing the same IP",
   "main": "gimmesites.js",
   "scripts": {
-    "start": "node gimmesites.js"
+    "start": "node gimmesites.js -t 127.0.0.1"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "iscloudy": "^1.0.0",
     "ora": "^5.1.0",
     "ping": "^0.4.1",
-    "single-line-log": "^1.1.2"
+    "single-line-log": "^1.1.2",
+    "socks-proxy-agent": "^7.0.0"
   }
 }
