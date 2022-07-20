@@ -30,11 +30,5 @@ module.exports = {
     console.log(`${chalk.hex('#FF003C').bold('Link found:')} ${chalk.hex('#FF003C').bold(url)}`);
     console.log('');
   },
-  error: function (error) {
-    if (error.bCloudFlare) {
-      console.log(
-        chalk.bold.red('Looks like cloudflare, not going any further!')
-      );
-    }
-  },
+  error: function (error) {},
 };
