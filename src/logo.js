@@ -1,12 +1,12 @@
-const chalk = require('chalk');
+const chalk = require("chalk");
 
 module.exports = function logo() {
   console.clear(); // clear console, for a better view
   console.log(
-    chalk.hex('#FF003C')(`
+    chalk.hex("#FF003C")(`
     ______ _____ _______ _______ _______ _______ _____ _______ _______ _______
    |  ____   |   |  |  | |  |  | |______ |______   |      |    |______ |______ {V1.0.0#beta}
-   |_____| __|__ |  |  | |  |  | |______ ______| __|__    |    |______ ______| By Firas Jelassi (https://github.com/Friscas/)
+   |_____| __|__ |  |  | |  |  | |______ ______| __|__    |    |______ ______| By Firas Jelassi (https://github.com/FriscPlusPlus)
   
    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 

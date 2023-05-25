@@ -1,4 +1,3 @@
-const args = require("args-parser")(process.argv);
 const validator = require("./src/argsHelper");
 const Search = require("./src/BingSearch");
 const logo = require("./src/logo");
@@ -12,7 +11,7 @@ async function start() {
   /**
    * the function is called argsValidation and you can find it in the module src/argsHelper with full description
    */
-  const validatedArgs = await validator(args);
+  const validatedArgs = await validator(process.argv);
 
   // if the help flag is given or an error occurs we just end the program
 
